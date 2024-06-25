@@ -1,4 +1,5 @@
 using Bogus;
+using CursoOnline.Domain.Base;
 using CursoOnline.Domain.Test.Builders;
 using CursoOnline.Domain.Test.Utils;
 using ExpectedObjects;
@@ -38,7 +39,7 @@ namespace CursoOnline.Domain.Test.Cursos
         public void NaoDeveCursoTerUmNomeInvalido(string nomeInvalido)
         {
 
-            Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ExecaoDeDominio>(() =>
             CursoBuilder.Novo().ComNome(nomeInvalido).Build()
             )
                 .ComMensagem("Nome inválido!");
@@ -58,7 +59,7 @@ namespace CursoOnline.Domain.Test.Cursos
                 Valor = (double)950
             };
 
-            Assert.Throws<ArgumentException>(() => CursoBuilder.Novo().ComCargaHoraria(cargaHorariaInvalida).Build())
+            Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComCargaHoraria(cargaHorariaInvalida).Build())
                 .ComMensagem("Carga horária inválida!");
         }
 
@@ -76,7 +77,7 @@ namespace CursoOnline.Domain.Test.Cursos
                 Valor = valorInvalido
             };
 
-            Assert.Throws<ArgumentException>(() => CursoBuilder.Novo().ComValor(valorInvalido).Build())
+            Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComValor(valorInvalido).Build())
                 .ComMensagem("Valor inválido!");
 
         }
