@@ -10,10 +10,12 @@ namespace CursoOnline.Domain.Test.Cursos
     public class CursoTest : IDisposable
     {
         private readonly ITestOutputHelper _output;
+        private readonly Faker _faker;
         public CursoTest(ITestOutputHelper output)
         {
             _output = output;
             _output.WriteLine("Construtor sendo executado");
+            _faker = new Faker();
         }
 
         [Fact]
@@ -49,37 +51,90 @@ namespace CursoOnline.Domain.Test.Cursos
         [InlineData(0)]
         [InlineData(-1)]
         [InlineData(-200)]
-        public void NaoDeveCursoTerCargaHorariaMenorQue1(double cargaHorariaInvalida)
+        public void NaoDeveCursoTerCargaHorariaInvalida(double cargaHorariaInvalida)
         {
-            var cursoEsperado = new
-            {
-                Nome = "Curso de pilotagem de Moto",
-                CargaHoraria = (double)cargaHorariaInvalida,
-                PublicoAlvo = PublicoAlvoEnum.Estudante,
-                Valor = (double)950
-            };
-
             Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComCargaHoraria(cargaHorariaInvalida).Build())
                 .ComMensagem("Carga horária inválida!");
+        }
+
+        [Theory]
+       [InlineData(0)]
+        [InlineData(-1)]
+        [InlineData(-200)]
+        [InlineData(50)]
+        public void NaoDeveCursoTerValorInvalido(double valorInvalido)
+        {
+            Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComValor(valorInvalido).Build())
+                .ComMensagem("Valor inválido!");
+        }
+
+        [Fact]
+        public void DeveAlterarNome()
+        {
+            var nomeEsperado = _faker.Person.FullName;
+            var curso = CursoBuilder.Novo().Build();
+            curso.AlterarNome(nomeEsperado);
+
+            Assert.Equal(nomeEsperado, curso.Nome);
+        }
+
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void NaoDeveAlterarCursoComUmNomeInvalido(string nomeInvalido)
+        {
+            var curso = CursoBuilder.Novo().Build();
+
+            Assert.Throws<ExecaoDeDominio>(() => curso.AlterarNome(nomeInvalido))
+                .ComMensagem("Nome inválido!");
+        }
+
+        [Fact]
+        public void DeveAlterarCargaHoraria()
+        {
+            var cargaHorariaEsperada = _faker.Random.Double(1,360);
+            var curso = CursoBuilder.Novo().Build();
+
+            curso.AlterarCargaHoraria(cargaHorariaEsperada);
+
+            Assert.Equal(cargaHorariaEsperada, curso.CargaHoraria);
         }
 
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
         [InlineData(-200)]
-        public void NaoDeveCursoTerValorMenorQue1(double valorInvalido)
+        public void NaoDeveAlterarCursoComCargaHorariaInvalida(double cargaHorariaInvalida)
         {
-            var cursoEsperado = new
-            {
-                Nome = "Curso de pilotagem de Moto",
-                CargaHoraria = (double)80,
-                PublicoAlvo = PublicoAlvoEnum.Estudante,
-                Valor = valorInvalido
-            };
+            var curso = CursoBuilder.Novo().Build();
 
-            Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComValor(valorInvalido).Build())
+            Assert.Throws<ExecaoDeDominio>(() => curso.AlterarCargaHoraria(cargaHorariaInvalida))
+                .ComMensagem("Carga horária inválida!");
+        }
+
+        [Fact]
+        public void DeveAlterarValor()
+        {
+            var valorEsperada = _faker.Random.Double(100, 2000);
+            var curso = CursoBuilder.Novo().Build();
+
+            curso.AlterarValor(valorEsperada);
+
+            Assert.Equal(valorEsperada, curso.Valor);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        [InlineData(-200)]
+        [InlineData(50)]
+        public void NaoDeveAlterarCursoComValorInvalido(double cargaHorariaInvalida)
+        {
+            var curso = CursoBuilder.Novo().Build();
+
+            Assert.Throws<ExecaoDeDominio>(() => curso.AlterarValor(cargaHorariaInvalida))
                 .ComMensagem("Valor inválido!");
-
         }
 
         public void Dispose()
