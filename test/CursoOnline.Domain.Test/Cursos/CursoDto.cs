@@ -7,6 +7,6 @@
         public string PublicoAlvo { get;  set; }
         public double Valor { get;  set; }
         public string Descricao { get;  set; }
-
+        public int Id { get;  set; }
     }
 }

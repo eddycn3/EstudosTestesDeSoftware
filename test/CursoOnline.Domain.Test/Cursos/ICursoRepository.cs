@@ -4,5 +4,6 @@
     {
         void Adicionar(Curso curso);
         Curso ObterPeloNome(string nome);
+        Curso ObterPeloId(int id);
     }
 }

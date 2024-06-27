@@ -44,7 +44,7 @@ namespace CursoOnline.Domain.Test.Cursos
             Assert.Throws<ExecaoDeDominio>(() =>
             CursoBuilder.Novo().ComNome(nomeInvalido).Build()
             )
-                .ComMensagem("Nome inválido!");
+                .ComMensagem(MensagensValidacaoDeDominio.NomeInvalido);
         }
 
         [Theory]
@@ -54,7 +54,7 @@ namespace CursoOnline.Domain.Test.Cursos
         public void NaoDeveCursoTerCargaHorariaInvalida(double cargaHorariaInvalida)
         {
             Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComCargaHoraria(cargaHorariaInvalida).Build())
-                .ComMensagem("Carga horária inválida!");
+                .ComMensagem(MensagensValidacaoDeDominio.CargaHorariaInvalida);
         }
 
         [Theory]
@@ -65,7 +65,7 @@ namespace CursoOnline.Domain.Test.Cursos
         public void NaoDeveCursoTerValorInvalido(double valorInvalido)
         {
             Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComValor(valorInvalido).Build())
-                .ComMensagem("Valor inválido!");
+                .ComMensagem(MensagensValidacaoDeDominio.ValorInvalido);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace CursoOnline.Domain.Test.Cursos
             var curso = CursoBuilder.Novo().Build();
 
             Assert.Throws<ExecaoDeDominio>(() => curso.AlterarNome(nomeInvalido))
-                .ComMensagem("Nome inválido!");
+                .ComMensagem(MensagensValidacaoDeDominio.NomeInvalido);
         }
 
         [Fact]
@@ -110,7 +110,7 @@ namespace CursoOnline.Domain.Test.Cursos
             var curso = CursoBuilder.Novo().Build();
 
             Assert.Throws<ExecaoDeDominio>(() => curso.AlterarCargaHoraria(cargaHorariaInvalida))
-                .ComMensagem("Carga horária inválida!");
+                .ComMensagem(MensagensValidacaoDeDominio.CargaHorariaInvalida);
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace CursoOnline.Domain.Test.Cursos
             var curso = CursoBuilder.Novo().Build();
 
             Assert.Throws<ExecaoDeDominio>(() => curso.AlterarValor(cargaHorariaInvalida))
-                .ComMensagem("Valor inválido!");
+                .ComMensagem(MensagensValidacaoDeDominio.ValorInvalido);
         }
 
         public void Dispose()

@@ -2,8 +2,9 @@
 
 namespace CursoOnline.Domain
 {
-    public class Curso
+    public class Curso : Entidade
     {
+
         public string Nome { get; private set; }
         public double CargaHoraria { get; private set; }
         public PublicoAlvoEnum PublicoAlvo { get; private set; }
@@ -13,9 +14,9 @@ namespace CursoOnline.Domain
         public Curso(string nome, double cargaHoraria, PublicoAlvoEnum publicoAlvo, double valor, string descricao)
         {
             ValidadorDeRegra.Novo()
-                .Quando(string.IsNullOrEmpty(nome), "Nome inválido!")
-                .Quando(cargaHoraria < 1, "Carga horária inválida!")
-                .Quando(valor < 100, "Valor inválido!")
+                .Quando(string.IsNullOrEmpty(nome), MensagensValidacaoDeDominio.NomeInvalido)
+                .Quando(cargaHoraria < 1, MensagensValidacaoDeDominio.CargaHorariaInvalida)
+                .Quando(valor < 100, MensagensValidacaoDeDominio.ValorInvalido)
                 .DispararExcecaoSeExistir();
  
             Nome = nome;
@@ -29,7 +30,7 @@ namespace CursoOnline.Domain
         public void AlterarNome(string nomeEsperado)
         {
             ValidadorDeRegra.Novo()
-               .Quando(string.IsNullOrEmpty(nomeEsperado), "Nome inválido!")
+               .Quando(string.IsNullOrEmpty(nomeEsperado), MensagensValidacaoDeDominio.NomeInvalido)
                             .DispararExcecaoSeExistir();
 
             Nome = nomeEsperado;
@@ -38,7 +39,7 @@ namespace CursoOnline.Domain
         public void AlterarCargaHoraria(double cargaHorariaEsperada)
         {
             ValidadorDeRegra.Novo()
-              .Quando(cargaHorariaEsperada < 1, "Carga horária inválida!")
+              .Quando(cargaHorariaEsperada < 1, MensagensValidacaoDeDominio.CargaHorariaInvalida)
               .DispararExcecaoSeExistir();
 
             CargaHoraria = cargaHorariaEsperada;
@@ -47,7 +48,7 @@ namespace CursoOnline.Domain
         public void AlterarValor(double valorEsperada)
         {
             ValidadorDeRegra.Novo()
-              .Quando(valorEsperada < 100, "Valor inválido!")
+              .Quando(valorEsperada < 100, MensagensValidacaoDeDominio.ValorInvalido)
               .DispararExcecaoSeExistir();
 
             Valor = valorEsperada;

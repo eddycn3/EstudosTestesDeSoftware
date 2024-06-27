@@ -20,9 +20,9 @@ namespace CursoOnline.Domain.Test.Cursos
             {
                 Nome = fake.Random.Words(),
                 Descricao = fake.Lorem.Paragraphs(),
-                CargaHoraria = fake.Random.Double(1,100),
+                CargaHoraria = fake.Random.Double(50, 1000),
                 PublicoAlvo = "Estudante",
-                Valor = fake.Random.Double(200,5000),
+                Valor = fake.Random.Double(1000,2000),
             };
 
             _cursoRepositoryMock = new Mock<ICursoRepository>();
@@ -48,18 +48,49 @@ namespace CursoOnline.Domain.Test.Cursos
             _cursoDto.PublicoAlvo = "Médico";
 
             Assert.Throws<ExecaoDeDominio>(() => _armazenadorDeCursos.Armazenar(_cursoDto))
-                .ComMensagem("Publico Alvo Inválido");
+                .ComMensagem(MensagensValidacaoDeDominio.PublicoAlvoInvalido);
         }
 
         [Fact]
         public void NaoDeveAdicionarCursoComMesmoNomeDeOutroJaSalvo()
         {
-            var _cursoJaSalvo = CursoBuilder.Novo().ComNome(_cursoDto.Nome).Build();
+            var _cursoJaSalvo = CursoBuilder.Novo().ComId(1).ComNome(_cursoDto.Nome).Build();
           
             _cursoRepositoryMock.Setup(r=> r.ObterPeloNome(_cursoDto.Nome)).Returns(_cursoJaSalvo);
 
             Assert.Throws<ExecaoDeDominio>(() => _armazenadorDeCursos.Armazenar(_cursoDto))
-              .ComMensagem("Nome do curso já consta no banco de dados");
+              .ComMensagem(MensagensValidacaoDeDominio.CursoJaExiste);
+        }
+
+        [Fact]
+        public void DeveAlterarCurso()
+        {
+            _cursoDto.Id = 2332;
+            var curso = CursoBuilder.Novo().Build();
+
+            _cursoRepositoryMock.Setup(r => r.ObterPeloId(_cursoDto.Id)).Returns(curso);
+
+            _armazenadorDeCursos.Armazenar(_cursoDto);
+
+            Assert.Equal(_cursoDto.Nome, curso.Nome);
+            Assert.Equal(_cursoDto.Valor, curso.Valor);
+            Assert.Equal(_cursoDto.CargaHoraria, curso.CargaHoraria);
+          
+        }
+
+        [Fact]
+        public void NaoDeveAdicionarNoRepositorioSeCursoJaExiste()
+        {
+
+            _cursoDto.Id = 2332;
+            var curso = CursoBuilder.Novo().Build();
+
+            _cursoRepositoryMock.Setup(r => r.ObterPeloId(_cursoDto.Id)).Returns(curso);
+
+            _armazenadorDeCursos.Armazenar(_cursoDto);
+
+            _cursoRepositoryMock.Verify(v => v.Adicionar(It.IsAny<Curso>()), Times.Never);
+
         }
 
     }
