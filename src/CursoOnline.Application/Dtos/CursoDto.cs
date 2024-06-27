@@ -1,4 +1,4 @@
-﻿namespace CursoOnline.Domain.Test.Cursos
+﻿namespace CursoOnline.Application.Dtos
 {
     public class CursoDto
     {

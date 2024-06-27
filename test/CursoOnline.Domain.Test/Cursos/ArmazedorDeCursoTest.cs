@@ -1,5 +1,8 @@
 ﻿using Bogus;
+using CursoOnline.Application.Dtos;
+using CursoOnline.Application.Services;
 using CursoOnline.Domain.Base;
+using CursoOnline.Domain.Interfaces;
 using CursoOnline.Domain.Test.Builders;
 using CursoOnline.Domain.Test.Utils;
 using Moq;

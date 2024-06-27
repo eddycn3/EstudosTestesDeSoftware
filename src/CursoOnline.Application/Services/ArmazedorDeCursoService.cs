@@ -1,6 +1,9 @@
-﻿using CursoOnline.Domain.Base;
+﻿using CursoOnline.Application.Dtos;
+using CursoOnline.Domain;
+using CursoOnline.Domain.Base;
+using CursoOnline.Domain.Interfaces;
 
-namespace CursoOnline.Domain.Test.Cursos
+namespace CursoOnline.Application.Services
 {
     public class ArmazedorDeCursoService
     {

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoOnline.Domain.Test", "test\CursoOnline.Domain.Test\CursoOnline.Domain.Test.csproj", "{2078A39A-FB7B-4159-904F-311EF7FBF6CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoOnline.Domain.Test", "test\CursoOnline.Domain.Test\CursoOnline.Domain.Test.csproj", "{2078A39A-FB7B-4159-904F-311EF7FBF6CC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{472F1670-5BBE-4213-959E-BE537A1B4622}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoOnline.Domain", "src\CursoOnline.Domain\CursoOnline.Domain.csproj", "{5DF73147-56FA-4CF3-AEB2-7540437D815C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoOnline.Domain", "src\CursoOnline.Domain\CursoOnline.Domain.csproj", "{5DF73147-56FA-4CF3-AEB2-7540437D815C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoOnline.Application", "src\CursoOnline.Application\CursoOnline.Application.csproj", "{B829518E-6F9E-4A19-8044-8C352FE7C502}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{5DF73147-56FA-4CF3-AEB2-7540437D815C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DF73147-56FA-4CF3-AEB2-7540437D815C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DF73147-56FA-4CF3-AEB2-7540437D815C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B829518E-6F9E-4A19-8044-8C352FE7C502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B829518E-6F9E-4A19-8044-8C352FE7C502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B829518E-6F9E-4A19-8044-8C352FE7C502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B829518E-6F9E-4A19-8044-8C352FE7C502}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
