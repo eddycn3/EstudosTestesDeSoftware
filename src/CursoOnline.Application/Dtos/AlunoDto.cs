@@ -8,6 +8,7 @@ namespace CursoOnline.Application.Dtos
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }
-        public PublicoAlvoEnum PublicoAlvo { get; set; }
+        public string PublicoAlvo { get; set; }
+
     }
 }

@@ -8,6 +8,7 @@
         public const string CursoJaExiste = "Curso já consta no banco de dados";
         public const string PublicoAlvoInvalido = "Publico Alvo Inválido";
         public const string CpfInvalido = "Cpf Inválido";
-        public static string EmailInvalido = "Email Inválido";
+        public const string EmailInvalido = "Email Inválido";
+        public const string AlunoJaExistente = "Aluno já consta no banco de dados";
     }
 }

@@ -5,6 +5,7 @@ namespace CursoOnline.Domain.Test.Builders
 {
     public class AlunoBuilder
     {
+        private int _id;
         private string _nome = "Eduardo C Neto";
         private string _cpf = "032.591.070-70";
         private string _email = "teste@teste.com.br";
@@ -17,7 +18,15 @@ namespace CursoOnline.Domain.Test.Builders
 
         public Aluno Build()
         {
-            return new Aluno(_nome, _email, _cpf, _publicoAlvo);
+            var aluno = new Aluno(_nome, _email, _cpf, _publicoAlvo);
+
+            if (_id > 0)
+            {
+                var propertyInfo = aluno.GetType().GetProperty("Id");
+                propertyInfo?.SetValue(aluno, Convert.ChangeType(_id, propertyInfo.PropertyType), null);
+            }
+
+            return aluno;
         }
 
         public AlunoBuilder ComNome(string nome)
@@ -26,15 +35,21 @@ namespace CursoOnline.Domain.Test.Builders
             return this;
         }
 
-        internal AlunoBuilder ComCpf(string cpf)
-        {
-            _cpf= cpf;
-            return this;
-        }
-
         public AlunoBuilder ComEmail(string email)
         {
             _email = email;
+            return this;
+        }
+
+        public AlunoBuilder ComId(int id)
+        {
+            _id = id;
+            return this;
+        }
+
+        public AlunoBuilder ComCpf(string cpf) 
+        { 
+            _cpf = cpf;
             return this;
         }
     }

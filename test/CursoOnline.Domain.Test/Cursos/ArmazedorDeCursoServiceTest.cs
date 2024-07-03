@@ -10,13 +10,14 @@ using Moq;
 
 namespace CursoOnline.Domain.Test.Cursos
 {
-    public  class ArmazedorDeCursoTest
+    public  class ArmazedorDeCursoServiceTest
     {
         public readonly CursoDto _cursoDto;
         private readonly ArmazedorDeCursoService _armazenadorDeCursos;
         private Mock<ICursoRepository> _cursoRepositoryMock;
+        private readonly Mock<IPublicoAlvoConversor> _publicoAlvoConversorMock;
 
-        public ArmazedorDeCursoTest()
+        public ArmazedorDeCursoServiceTest()
         {
             var fake = new Faker();
             _cursoDto = new CursoDto
@@ -29,7 +30,8 @@ namespace CursoOnline.Domain.Test.Cursos
             };
 
             _cursoRepositoryMock = new Mock<ICursoRepository>();
-            _armazenadorDeCursos = new ArmazedorDeCursoService(_cursoRepositoryMock.Object);
+            _publicoAlvoConversorMock = new Mock<IPublicoAlvoConversor>();
+            _armazenadorDeCursos = new ArmazedorDeCursoService(_cursoRepositoryMock.Object, _publicoAlvoConversorMock.Object);
         }
 
         [Fact]
@@ -43,15 +45,6 @@ namespace CursoOnline.Domain.Test.Cursos
                     c.Descricao == _cursoDto.Descricao
                     )
                 ));
-        }
-
-        [Fact]
-        public void NaoDeveInformarPublicoAlvoInvalido()
-        {
-            _cursoDto.PublicoAlvo = "Médico";
-
-            Assert.Throws<ExecaoDeDominio>(() => _armazenadorDeCursos.Armazenar(_cursoDto))
-                .ComMensagem(MensagensValidacaoDeDominio.PublicoAlvoInvalido);
         }
 
         [Fact]

@@ -24,7 +24,15 @@ namespace CursoOnline.Domain
             PublicoAlvo = publicoAlvo;
         }
 
-      
+        public void AlterarCpf(string cpf)
+        {
+            Cpf = cpf;
+        }
+
+        public void AlterarNome(string nome)
+        {
+            Nome = nome;
+        }
     }
 
 
