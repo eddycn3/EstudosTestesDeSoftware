@@ -26,7 +26,7 @@ namespace CursoOnline.Domain.Test.Cursos
                 Descricao = fake.Lorem.Paragraphs(),
                 CargaHoraria = fake.Random.Double(50, 1000),
                 PublicoAlvo = "Estudante",
-                Valor = fake.Random.Double(1000,2000),
+                Valor = fake.Random.Decimal(1000,2000),
             };
 
             _cursoRepositoryMock = new Mock<ICursoRepository>();

@@ -26,7 +26,7 @@ namespace CursoOnline.Domain.Test.Cursos
                 Nome = "Curso de pilotagem de Moto",
                 CargaHoraria = (double)80,
                 PublicoAlvo = PublicoAlvoEnum.Estudante,
-                Valor = (double)950
+                Valor = 950.0M
             };
 
             var curso = CursoBuilder.Novo().Build();
@@ -62,7 +62,7 @@ namespace CursoOnline.Domain.Test.Cursos
         [InlineData(-1)]
         [InlineData(-200)]
         [InlineData(50)]
-        public void NaoDeveCursoTerValorInvalido(double valorInvalido)
+        public void NaoDeveCursoTerValorInvalido(decimal valorInvalido)
         {
             Assert.Throws<ExecaoDeDominio>(() => CursoBuilder.Novo().ComValor(valorInvalido).Build())
                 .ComMensagem(MensagensValidacaoDeDominio.ValorInvalido);
@@ -116,7 +116,7 @@ namespace CursoOnline.Domain.Test.Cursos
         [Fact]
         public void DeveAlterarValor()
         {
-            var valorEsperada = _faker.Random.Double(100, 2000);
+            var valorEsperada = _faker.Random.Decimal(100, 2000);
             var curso = CursoBuilder.Novo().Build();
 
             curso.AlterarValor(valorEsperada);
@@ -129,7 +129,7 @@ namespace CursoOnline.Domain.Test.Cursos
         [InlineData(-1)]
         [InlineData(-200)]
         [InlineData(50)]
-        public void NaoDeveAlterarCursoComValorInvalido(double cargaHorariaInvalida)
+        public void NaoDeveAlterarCursoComValorInvalido(decimal cargaHorariaInvalida)
         {
             var curso = CursoBuilder.Novo().Build();
 

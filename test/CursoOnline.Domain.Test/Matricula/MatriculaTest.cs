@@ -15,7 +15,7 @@ namespace CursoOnline.Domain.Test.Matriculas
             {
                 Aluno = AlunoBuilder.Novo().Build(),
                 Curso = CursoBuilder.Novo().Build(),
-                ValorMatricula = 1000.0M
+                ValorMatricula = 950.0M
             };
 
             var matricula = new Matricula(matriculaEsperada.Aluno, matriculaEsperada.Curso, matriculaEsperada.ValorMatricula);
@@ -51,21 +51,17 @@ namespace CursoOnline.Domain.Test.Matriculas
 
         }
 
+        [Fact]
         public void NaoDeveCriarMatriculaComValorMaiorQueValorDoCurso()
         {
 
             var aluno = AlunoBuilder.Novo().Build();
-            var curso = CursoBuilder.Novo().ComValor(50.0).Build();
+            var curso = CursoBuilder.Novo().ComValor(100.0M).Build();
             var valorMaior = 200.0M;
 
-            Assert.Throws<ExecaoDeDominio>(() => MatriculaBuilder.Novo().ComCurso(curso).ComValor(valorMaior))
+            Assert.Throws<ExecaoDeDominio>(() => MatriculaBuilder.Novo().ComCurso(curso).ComValor(valorMaior).Build())
                 .ComMensagem(MensagensValidacaoDeDominio.ValorMatriculaMaiorQueValorCurso);
         }
 
-        public void NaoDeveCriarMatriculaComAlunoDePublicoAlvoDiferenteDoPublicoAlvoDoCurso()
-        {
-            var aluno = AlunoBuilder.Novo().Build();
-            var curso = CursoBuilder.Novo().Build();
-        }
     }
 }

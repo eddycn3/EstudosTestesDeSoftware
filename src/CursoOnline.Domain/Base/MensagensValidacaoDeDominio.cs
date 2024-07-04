@@ -12,8 +12,7 @@
         public const string AlunoJaExistente = "Aluno já consta no banco de dados";
         public const string ValorMatriculaInvalido = "Valor da matrícula é inválido";
         public const string MatriculaSemAluno = "A matricula deve ter um aluno";
-
         public const string MatriculaSemCurso = "A matricula deve ter um curso";
-        public static string ValorMatriculaMaiorQueValorCurso = "Valor da matricula não pode ser maior que o valor do Curso";
+        public const string ValorMatriculaMaiorQueValorCurso = "Valor da matricula não pode ser maior que o valor do Curso";
     }
 }

@@ -8,7 +8,7 @@ namespace CursoOnline.Domain.Test.Builders
         private string _nome = "Curso de pilotagem de Moto";
         private double _cargaHoraria = (double)80;
         private PublicoAlvoEnum _publicoAlvo = PublicoAlvoEnum.Estudante;
-        private double _valor = (double)950;
+        private decimal _valor = 950.0M;
         private string _descricao = "Curso para pilotagem de motos";
 
         public static CursoBuilder Novo()
@@ -37,7 +37,7 @@ namespace CursoOnline.Domain.Test.Builders
             return this;
         }
 
-        public CursoBuilder ComValor(double valor)
+        public CursoBuilder ComValor(decimal valor)
         {
             _valor = valor;
             return this;

@@ -8,10 +8,10 @@ namespace CursoOnline.Domain
         public string Nome { get; private set; }
         public double CargaHoraria { get; private set; }
         public PublicoAlvoEnum PublicoAlvo { get; private set; }
-        public double Valor { get; private set; }
+        public decimal Valor { get; private set; }
         public string Descricao { get; private set; }
 
-        public Curso(string nome, double cargaHoraria, PublicoAlvoEnum publicoAlvo, double valor, string descricao)
+        public Curso(string nome, double cargaHoraria, PublicoAlvoEnum publicoAlvo, decimal valor, string descricao)
         {
             ValidadorDeRegra.Novo()
                 .Quando(string.IsNullOrEmpty(nome), MensagensValidacaoDeDominio.NomeInvalido)
@@ -45,7 +45,7 @@ namespace CursoOnline.Domain
             CargaHoraria = cargaHorariaEsperada;
         }
 
-        public void AlterarValor(double valorEsperada)
+        public void AlterarValor(decimal valorEsperada)
         {
             ValidadorDeRegra.Novo()
               .Quando(valorEsperada < 100, MensagensValidacaoDeDominio.ValorInvalido)

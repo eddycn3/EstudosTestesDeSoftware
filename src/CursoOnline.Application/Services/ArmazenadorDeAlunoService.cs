@@ -20,7 +20,7 @@ namespace CursoOnline.Application.Services
             var alunoJaSalvo = _alunoRepository.ObterPorId(alunoDto.Id);
 
             ValidadorDeRegra.Novo()
-                .Quando(alunoJaSalvo.Cpf == alunoDto.Cpf, MensagensValidacaoDeDominio.AlunoJaExistente)
+                .Quando(alunoJaSalvo is not null && alunoJaSalvo.Cpf == alunoDto.Cpf, MensagensValidacaoDeDominio.AlunoJaExistente)
                 .DispararExcecaoSeExistir();
 
             var publicoAlvoConvertido = _publicoAlvoConversor.Converter(alunoDto.PublicoAlvo);
