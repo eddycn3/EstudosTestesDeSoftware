@@ -60,5 +60,11 @@ namespace CursoOnline.Domain.Test.Builders
            _id =  id;
             return this;
         }
+
+        public CursoBuilder ComPublicoAlvo(PublicoAlvoEnum publicoAlvo)
+        {
+            _publicoAlvo = publicoAlvo;
+            return this;
+        }
     }
 }

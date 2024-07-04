@@ -3,6 +3,10 @@ using CursoOnline.Domain;
 using ExpectedObjects;
 using CursoOnline.Domain.Base;
 using CursoOnline.Domain.Test.Utils;
+using CursoOnline.Application.Dtos;
+using CursoOnline.Application.Services;
+using CursoOnline.Domain.Interfaces;
+using Moq;
 
 namespace CursoOnline.Domain.Test.Matriculas
 {
@@ -61,6 +65,19 @@ namespace CursoOnline.Domain.Test.Matriculas
 
             Assert.Throws<ExecaoDeDominio>(() => MatriculaBuilder.Novo().ComCurso(curso).ComValor(valorMaior).Build())
                 .ComMensagem(MensagensValidacaoDeDominio.ValorMatriculaMaiorQueValorCurso);
+        }
+
+
+        [Fact]
+        public void NaoDeveCriarMatriculaDeAlunoECursoComPublicoAlvoDiferentes()
+        {
+            var curso = CursoBuilder.Novo().ComId(1).ComPublicoAlvo(PublicoAlvoEnum.Estudante).Build();
+
+            var aluno = AlunoBuilder.Novo().ComId(1).ComPublicoAlvo(PublicoAlvoEnum.Universitario).Build();
+        
+            Assert.Throws<ExecaoDeDominio>(() => MatriculaBuilder.Novo().ComCurso(curso).ComAluno(aluno).Build())
+                .ComMensagem(MensagensValidacaoDeDominio.PublicoAlvoDiferente);
+
         }
 
     }

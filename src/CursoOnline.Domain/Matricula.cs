@@ -15,6 +15,7 @@ namespace CursoOnline.Domain
                 .Quando(curso is null, MensagensValidacaoDeDominio.MatriculaSemCurso)
                 .Quando(valorMatricula < 1.0M, MensagensValidacaoDeDominio.ValorMatriculaInvalido)
                 .Quando(valorMatricula > curso.Valor, MensagensValidacaoDeDominio.ValorMatriculaMaiorQueValorCurso)
+                .Quando(aluno is not null && curso is not null && aluno.PublicoAlvo != curso.PublicoAlvo, MensagensValidacaoDeDominio.PublicoAlvoDiferente)
                 .DispararExcecaoSeExistir();
 
             Aluno = aluno;

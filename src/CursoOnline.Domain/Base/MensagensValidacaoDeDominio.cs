@@ -14,5 +14,8 @@
         public const string MatriculaSemAluno = "A matricula deve ter um aluno";
         public const string MatriculaSemCurso = "A matricula deve ter um curso";
         public const string ValorMatriculaMaiorQueValorCurso = "Valor da matricula não pode ser maior que o valor do Curso";
+        public const string PublicoAlvoDiferente = "Publico alvo diferente";
+        public const string AlunoNaoEncontrado = "O aluno não foi encontrado";
+        public const string CursoNaoEncontrado = "O curso não foi encontrado";
     }
 }
