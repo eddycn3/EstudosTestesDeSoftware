@@ -1,6 +1,4 @@
-﻿using CursoOnline.Domain;
-
-namespace CursoOnline.Application.Dtos
+﻿namespace CursoOnline.Application.Dtos
 {
     public class AlunoDto
     {
