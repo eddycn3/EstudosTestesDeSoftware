@@ -3,7 +3,7 @@ using CursoOnline.Domain;
 using CursoOnline.Domain.Base;
 using CursoOnline.Domain.Interfaces;
 
-namespace CursoOnline.Application.Services
+namespace CursoOnline.Application.Services.Matriculas
 {
     public class ArmazenadorDeMatriculaService
     {

@@ -80,5 +80,72 @@ namespace CursoOnline.Domain.Test.Matriculas
 
         }
 
+        [Fact]
+        public void DeveInformarNotaDoAlunoParaMatricula()
+        {
+            double notaAluno = 9.0;
+
+            var matricula  = MatriculaBuilder.Novo().ComValor(950).Build();
+
+            matricula.InformarNota(notaAluno);
+
+            Assert.Equal(notaAluno, matricula.NotaAluno);
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(11)]
+        public void NaoDeveInformarNotaDeAlunoInvalida(double notaInvalida)
+        {
+            var matricula = MatriculaBuilder.Novo().ComValor(950.0M).Build();
+            Assert.Throws<ExecaoDeDominio>(() => matricula.InformarNota(notaInvalida))
+                 .ComMensagem(MensagensValidacaoDeDominio.NotaDeAlunoInvalida);
+        }
+
+        [Fact]
+        public void DeveIndicarQueCursoFoiConcluido()
+        {
+            const double notaAluno = 9.5;
+            var matricula = MatriculaBuilder.Novo().Build();
+
+            matricula.InformarNota(notaAluno);
+
+            Assert.True(matricula.CursoConcluido);
+        }
+
+        [Fact]
+        public void DeveCancelarMatricula()
+        {
+            var matricula = MatriculaBuilder.Novo().Build();
+
+            matricula.Cancelar();
+
+            Assert.True(matricula.Cancelada);
+        }
+
+
+        [Fact]
+        public void NaoDeveInformarNotaQuandoMatriculaCancelada()
+        {
+            var notaAluna = 3.0;
+            var matricula = MatriculaBuilder.Novo().Build();
+
+            matricula.Cancelar();
+
+            Assert.Throws<ExecaoDeDominio>(() => matricula.InformarNota(notaAluna))
+                .ComMensagem(MensagensValidacaoDeDominio.MatriculaCancelada);
+        }
+
+
+        [Fact]
+        public void NaoDeveCancelarQuandoMatriculaEstiverConcluida()
+        {
+            var matricula = MatriculaBuilder.Novo().ComConcluido(true).Build();
+
+            Assert.Throws<ExecaoDeDominio>(() => matricula.Cancelar())
+               .ComMensagem(MensagensValidacaoDeDominio.MatriculaConcluida);
+        }
+      
+
     }
 }

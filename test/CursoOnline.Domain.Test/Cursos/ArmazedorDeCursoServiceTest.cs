@@ -14,7 +14,7 @@ namespace CursoOnline.Domain.Test.Cursos
     {
         public readonly CursoDto _cursoDto;
         private readonly ArmazedorDeCursoService _armazenadorDeCursos;
-        private Mock<ICursoRepository> _cursoRepositoryMock;
+        private readonly Mock<ICursoRepository> _cursoRepositoryMock;
         private readonly Mock<IPublicoAlvoConversor> _publicoAlvoConversorMock;
 
         public ArmazedorDeCursoServiceTest()

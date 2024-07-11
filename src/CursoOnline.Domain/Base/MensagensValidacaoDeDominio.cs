@@ -17,5 +17,9 @@
         public const string PublicoAlvoDiferente = "Publico alvo diferente";
         public const string AlunoNaoEncontrado = "O aluno não foi encontrado";
         public const string CursoNaoEncontrado = "O curso não foi encontrado";
+        public const string NotaDeAlunoInvalida = "Nota informada é inválida";
+        public const string MatriculaNaoLocalizada = "Matricula não localizada";
+        public const string MatriculaCancelada = "Ação não permitida por matricula estar cancelada";
+        public const string MatriculaConcluida = "Ação não permitida por matricula estar concluida";
     }
 }

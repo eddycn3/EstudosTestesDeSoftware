@@ -1,5 +1,5 @@
 ﻿using CursoOnline.Application.Dtos;
-using CursoOnline.Application.Services;
+using CursoOnline.Application.Services.Matriculas;
 using CursoOnline.Domain.Base;
 using CursoOnline.Domain.Interfaces;
 using CursoOnline.Domain.Test.Builders;
